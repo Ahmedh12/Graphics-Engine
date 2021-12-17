@@ -17,5 +17,5 @@ void main(){
     //Done:Sandra Hany
     //texture2D(tex,fs_in.tex_coord)->texture color 
     //fs_in.color->vertex color
-    frag_color=texture2D(tex,fs_in.tex_coord)*fs_in.color; 
+    frag_color=texture2D(tex,fs_in.tex_coord)*fs_in.color*tint; 
 }
