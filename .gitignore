@@ -32,3 +32,6 @@ expected/
 
 #vendor
 vendor/
+
+#errors
+errors/
