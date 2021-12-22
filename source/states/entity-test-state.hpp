@@ -64,6 +64,7 @@ class EntityTestState : public our::State
             if (meshRenderer == nullptr)
                 continue;
 
+            // Millania Sameh ===> DONE
             //TODO: Complete the loop body to draw the current entity
             // Then we setup the material, send the transform matrix to the shader then draw the mesh
 
@@ -72,6 +73,10 @@ class EntityTestState : public our::State
             // {
             //     meshRenderer->deserialize(config["components"]);
             // }
+
+            meshRenderer->material->setup();
+            meshRenderer->material->shader->set("transform", VP);
+            meshRenderer->mesh->draw();
         }
     }
 

@@ -8,7 +8,6 @@ namespace our
 {
 
     // target: returns the transformation matrix from the entity's local space to the world space
-
     // Remember that you can get the transformation matrix from this entity to its parent from "localTransform"
     // To get the local to world matrix, you need to combine this entities matrix with its parent's matrix and
     // its parent's parent's matrix and so on till you reach the root.
@@ -17,12 +16,12 @@ namespace our
         //TODO: Write this function
 
         // Millania Sameh ===> DONE
-        glm::mat4 transformation_matrix = glm::mat4(1.0f); // initialize an identity matrix
-        Entity *current = parent;                          // initialize current's parent pointer
-        while (current != nullptr)                         // while loop to get all the parents up to the root
+        glm::mat4 transformation_matrix = localTransform.toMat4(); // initialize an identity matrix
+        Entity *current = parent;                                  // initialize current's parent pointer
+        while (current != nullptr)                                 // while loop to get all the parents up to the root
         {
-            transformation_matrix = localTransform.toMat4() * transformation_matrix; // ===>TODO check this order
-            current = current->parent;                                               // advance the pointer to get next parent
+            transformation_matrix = current->localTransform.toMat4() * transformation_matrix; // ===>TODO check this order
+            current = current->parent;                                                        // advance the pointer to get next parent
         }
         return transformation_matrix;
     }

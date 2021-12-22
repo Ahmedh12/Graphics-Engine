@@ -51,9 +51,10 @@ namespace our
         */
 
         // Millania Sameh ===> DONE
-        glm::vec3 eye = M * glm::vec4(0, 0, 0, 0);
-        glm::vec3 center = M * glm::vec4(0, 0, -1, 0);
-        glm::vec3 up = M * glm::vec4(0, 1, 0, 0);
+        glm::vec3 eye = M * glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);
+        glm::vec3 center = M * glm::vec4(0.0f, 0.0f, -1.0f, 1.0f);
+        glm::vec3 up = M * glm::vec4(0.0f, 1.0f, 0.0f, 1.0f);
+
         glm::mat4 camera_view = glm::lookAt(eye, center, up);
 
         return camera_view;
