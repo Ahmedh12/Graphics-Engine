@@ -97,9 +97,9 @@ namespace our
         void draw()
         {
             // TODO: Write this function
-            // Done: Ahmed Hussien
+            //Done: Ahmed Hussien
             glBindVertexArray(VAO);
-            glDrawElements(GL_TRIANGLES, elementCount, GL_UNSIGNED_INT, (void *)0);
+            glDrawElements(GL_TRIANGLES, elementCount, GL_UNSIGNED_INT, (void*)0);
         }
 
         // this function should delete the vertex & element buffers and the vertex array object
