@@ -106,14 +106,16 @@ namespace our
             for (auto opaque : opaqueCommands)
             {
                 opaque.material->setup();
-                opaque.material->shader->set("transform", VP * opaque.localToWorld());
+                glm:: mat4 transformation = VP * opaque.localToWorld;
+                opaque.material->shader->set("transform",transformation);
                 opaque.mesh->draw();
             }
 
             for (auto transparent : transparentCommands)
             {
                 transparent.material->setup();
-                transparent.material->shader->set("transform", VP * transparent.localToWorld());
+                glm:: mat4 transformation = VP * transparent.localToWorld;
+                transparent.material->shader->set("transform",transformation);
                 transparent.mesh->draw();
             }
         };
