@@ -17,9 +17,9 @@ namespace our
         The preceeding Function Calls construct the transformation matrices
         given the values of the vec3 data Members of the struct
         */
-        glm::mat4 translateMat = glm::translate(glm::mat4(1.0), position);
+        glm::mat4 translateMat = glm::translate(glm::mat4(1.0f), position);
         glm::mat4 rotateMat = glm::yawPitchRoll(rotation.y, rotation.x, rotation.z);
-        glm::mat4 scaleMat = glm::scale(glm::mat4(1.0), scale);
+        glm::mat4 scaleMat = glm::scale(glm::mat4(1.0f), scale);
 
         /*
         Multiplying the 3 matrices in the following order

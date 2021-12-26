@@ -30,20 +30,20 @@ namespace our
     {
         auto owner = getOwner();
         auto M = owner->getLocalToWorldMatrix();
-        //TODO: Complete this function
-        //HINT:
-        // In the camera space:
-        // - eye is the origin (0,0,0)
-        // - center is any point on the line of sight. So center can be any point (0,0,z) where z < 0. For simplicity, we let center be (0,0,-1)
-        // - up is the direction (0,1,0)
-        // but to use glm::lookAt, we need eye, center and up in the world state.
-        // Since M (see above) transforms from the camera to the world space, you can use M to compute:
-        // - the eye position which is the point (0,0,0) but after being transformed by M
-        // - the center position which is the point (0,0,-1) but after being transformed by M
-        // - the up direction which is the vector (0,1,0) but after being transformed by M
-        // then you can use glm::lookAt
+        // TODO: Complete this function
+        // HINT:
+        //  In the camera space:
+        //  - eye is the origin (0,0,0)
+        //  - center is any point on the line of sight. So center can be any point (0,0,z) where z < 0. For simplicity, we let center be (0,0,-1)
+        //  - up is the direction (0,1,0)
+        //  but to use glm::lookAt, we need eye, center and up in the world state.
+        //  Since M (see above) transforms from the camera to the world space, you can use M to compute:
+        //  - the eye position which is the point (0,0,0) but after being transformed by M
+        //  - the center position which is the point (0,0,-1) but after being transformed by M
+        //  - the up direction which is the vector (0,1,0) but after being transformed by M
+        //  then you can use glm::lookAt
 
-        /* 
+        /*
         =========== get the eye, center, up ===========
             eye: ana wa2f feen
             center: where you're looking => object location
@@ -53,7 +53,7 @@ namespace our
         // Millania Sameh ===> DONE
         glm::vec3 eye = M * glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);
         glm::vec3 center = M * glm::vec4(0.0f, 0.0f, -1.0f, 1.0f);
-        glm::vec3 up = M * glm::vec4(0.0f, 1.0f, 0.0f, 1.0f);
+        glm::vec3 up = M * glm::vec4(0.0f, 1.0f, 0.0f, 0.0f);
 
         glm::mat4 camera_view = glm::lookAt(eye, center, up);
 
@@ -64,11 +64,11 @@ namespace our
     // "viewportSize" is used to compute the aspect ratio
     glm::mat4 CameraComponent::getProjectionMatrix(glm::ivec2 viewportSize) const
     {
-        //TODO: Write this function
-        // NOTE: The function glm::ortho can be used to create the orthographic projection matrix
-        // It takes left, right, bottom, top. Bottom is -orthoHeight/2 and Top is orthoHeight/2.
-        // Left and Right are the same but after being multiplied by the aspect ratio
-        // For the perspective camera, you can use glm::perspective
+        // TODO: Write this function
+        //  NOTE: The function glm::ortho can be used to create the orthographic projection matrix
+        //  It takes left, right, bottom, top. Bottom is -orthoHeight/2 and Top is orthoHeight/2.
+        //  Left and Right are the same but after being multiplied by the aspect ratio
+        //  For the perspective camera, you can use glm::perspective
 
         // Millania Sameh ===> DONE
         glm::mat4 projection;
@@ -83,7 +83,7 @@ namespace our
             float botton = -orthoHeight / 2;
             float top = orthoHeight / 2;
 
-            projection = glm::ortho(left, right, botton, top);
+            projection = glm::ortho(left, right, botton, top, near, far);
         }
 
         return projection;
