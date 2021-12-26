@@ -48,25 +48,24 @@ namespace our
         {
             // TODO: Write this function
             // DONE: Ahmed Hussien
-
-            /*Add explination to what each of the Following e.g. Blending ,depth testing and faceculling mean along with their options*/
-           
+            
             /*
             setting the values of the color mask and depth mask
             */
 
-           glColorMask(colorMask.x,colorMask.y,colorMask.z,colorMask.w);
-           glDepthMask(depthMask);
+            glColorMask(colorMask.x, colorMask.y, colorMask.z, colorMask.w); // Specify whether red, green, blue, and alpha can or cannot be written into the frame buffer.
+                                                                             // The initial values are all GL_TRUE, indicating that the color components can be written.
+            glDepthMask(depthMask);                                          // Specifies wether to allow drawing on the depth buffer e.g. false --> dont draw keep the values alraedy stored
 
             /*
             checking if face Culling is enabled
             and hence setting it parameters
             */
-            if (faceCulling.enabled)
+            if (faceCulling.enabled) // This option prevent drawing of back Faces
             {
-                glEnable(GL_CULL_FACE);
-                glCullFace(faceCulling.culledFace);
-                glFrontFace(faceCulling.frontFace);
+                glEnable(GL_CULL_FACE);             // This call allows enabling the face culling option
+                glCullFace(faceCulling.culledFace); // Specifies whether front- or back-facing facets are candidates for culling, Deafault is GL_BACK
+                glFrontFace(faceCulling.frontFace); // Specifies the orientation of front-facing polygons. GL_CW and GL_CCW are accepted. The initial value is GL_CCW
             }
             else
                 glDisable(GL_CULL_FACE);
@@ -77,8 +76,9 @@ namespace our
             */
             if (depthTesting.enabled)
             {
-                glEnable(GL_DEPTH_TEST);
-                glDepthFunc(depthTesting.function);
+                glEnable(GL_DEPTH_TEST);            // This call allows enabling the  depth testing option
+                glDepthFunc(depthTesting.function); //  Specifies the depth comparison function. Symbolic constants GL_NEVER, GL_LESS, GL_EQUAL, GL_LEQUAL,
+                                                    // GL_GREATER, GL_NOTEQUAL, GL_GEQUAL, and GL_ALWAYS are accepted. The initial value is GL_LESS.
             }
             else
                 glDisable(GL_DEPTH_TEST);
@@ -90,10 +90,18 @@ namespace our
 
             if (blending.enabled)
             {
-                glEnable(GL_BLEND);
-                glBlendEquation(blending.equation);
-                glBlendFunc(blending.sourceFactor, blending.destinationFactor);
-                glBlendColor(blending.constantColor.x, blending.constantColor.y, blending.constantColor.z, blending.constantColor.w);
+                glEnable(GL_BLEND);                 // This calls enables the blending option, it is related to transperency and depends on order of drawing
+                glBlendEquation(blending.equation); // specifies how source and destination colors are combined.
+                                                    // It must be GL_FUNC_ADD, GL_FUNC_SUBTRACT, GL_FUNC_REVERSE_SUBTRACT, GL_MIN, GL_MAX.
+
+                glBlendFunc(blending.sourceFactor, blending.destinationFactor); // Pixels can be drawn using a function that blends the incoming (source) RGBA values
+                                                                                // with the RGBA values that are already in the frame buffer (the destination values). Blending is
+                                                                                // initially disabled. Use glEnable and glDisable with argument GL_BLEND to enable and disable blending.
+
+                glBlendColor(blending.constantColor.x, blending.constantColor.y, blending.constantColor.z, blending.constantColor.w); // The GL_BLEND_COLOR may be used to calculate
+                                                                                                                                      // the source and destination blending factors
+                                                                                                                                      // mawgodeen fl eq. al heya glBlendFunc
+                                                                                                                                      // intialy equals zero
             }
             else
                 glDisable(GL_BLEND);
