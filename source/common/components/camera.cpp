@@ -51,9 +51,9 @@ namespace our
         */
 
         // Millania Sameh ===> DONE
-        glm::vec3 eye = M * glm::vec4(0, 0, 0, 0);
-        glm::vec3 center = M * glm::vec4(0, 0, -1, 0);
-        glm::vec3 up = M * glm::vec4(0, 1, 0, 0);
+        glm::vec3 eye = M * glm::vec4(0, 0, 0, 1);
+        glm::vec3 center = M * glm::vec4(0, 0, -1, 1);
+        glm::vec3 up = M * glm::vec4(0, 1, 0, 1);
         glm::mat4 camera_view = glm::lookAt(eye, center, up);
 
         return camera_view;
@@ -71,7 +71,7 @@ namespace our
 
         // Millania Sameh ===> DONE
         glm::mat4 projection;
-        float aspectRatio = viewportSize.x / viewportSize.y; // get the aspect ratio = x/y
+        float aspectRatio = (float)viewportSize.x / viewportSize.y; // get the aspect ratio = x/y
 
         if (cameraType == CameraType::PERSPECTIVE)
             projection = glm::perspective(fovY, aspectRatio, near, far);

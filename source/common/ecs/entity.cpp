@@ -17,11 +17,11 @@ namespace our
         //TODO: Write this function
 
         // Millania Sameh ===> DONE
-        glm::mat4 transformation_matrix = glm::mat4(1.0f); // initialize an identity matrix
+        glm::mat4 transformation_matrix = localTransform.toMat4(); // initialize an identity matrix
         Entity *current = parent;                          // initialize current's parent pointer
         while (current != nullptr)                         // while loop to get all the parents up to the root
         {
-            transformation_matrix = localTransform.toMat4() * transformation_matrix; // ===>TODO check this order
+            transformation_matrix = current->getLocalToWorldMatrix() * transformation_matrix; // ===>TODO check this order
             current = current->parent;                                               // advance the pointer to get next parent
         }
         return transformation_matrix;

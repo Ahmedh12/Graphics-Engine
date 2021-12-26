@@ -67,11 +67,9 @@ class EntityTestState : public our::State
             //TODO: Complete the loop body to draw the current entity
             // Then we setup the material, send the transform matrix to the shader then draw the mesh
 
-            // auto &config = getApp()->getConfig()["scene"]["world"];
-            // if (config.contains("components"))
-            // {
-            //     meshRenderer->deserialize(config["components"]);
-            // }
+            meshRenderer->material->setup();
+            meshRenderer->material->shader->set("transform",VP * entity->getLocalToWorldMatrix());
+            meshRenderer->mesh->draw();
         }
     }
 

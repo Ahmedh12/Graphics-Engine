@@ -99,6 +99,7 @@ namespace our
         {
             // TODO: Write this function
             //Done: Ahmed Hussien
+            glBindVertexArray(VAO);
             glDrawElements(GL_TRIANGLES, elementCount, GL_UNSIGNED_INT, (void*)0);
         }
 
