@@ -72,7 +72,7 @@ namespace our
 
         // Millania Sameh ===> DONE
         glm::mat4 projection;
-        float aspectRatio = viewportSize.x / viewportSize.y; // get the aspect ratio = x/y
+        float aspectRatio = (float)viewportSize.x / (float)viewportSize.y; // get the aspect ratio = x/y
 
         if (cameraType == CameraType::PERSPECTIVE)
             projection = glm::perspective(fovY, aspectRatio, near, far);

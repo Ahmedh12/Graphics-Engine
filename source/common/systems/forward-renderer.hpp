@@ -106,13 +106,15 @@ namespace our
             // Don't forget to set the "transform" uniform to be equal the model-view-projection matrix for each render command
             for (auto opaque : opaqueCommands)
             {
-                opaque.material->shader->set("transform", VP);
+                opaque.material->setup();
+                opaque.material->shader->set("transform", VP * opaque.localToWorld);
                 opaque.mesh->draw();
             }
 
             for (auto transparent : transparentCommands)
             {
-                transparent.material->shader->set("transform", VP);
+                transparent.material->setup();
+                transparent.material->shader->set("transform", VP * transparent.localToWorld);
                 transparent.mesh->draw();
             }
         };
