@@ -53,8 +53,8 @@ class EntityTestState : public our::State
         // Then we compute the VP matrix from the camera
         glm::ivec2 size = getApp()->getFrameBufferSize();
 
-        //TODO: Change the following line to compute the correct view projection matrix
-        // Millania Sameh ===> DONE
+        // TODO: Change the following line to compute the correct view projection matrix
+        //  Millania Sameh ===> DONE
         glm::mat4 VP = camera->getProjectionMatrix(size) * camera->getViewMatrix();
 
         for (auto &entity : world.getEntities())
@@ -65,17 +65,10 @@ class EntityTestState : public our::State
                 continue;
 
             // Millania Sameh ===> DONE
-            //TODO: Complete the loop body to draw the current entity
+            // TODO: Complete the loop body to draw the current entity
             // Then we setup the material, send the transform matrix to the shader then draw the mesh
-
-            // auto &config = getApp()->getConfig()["scene"]["world"];
-            // if (config.contains("components"))
-            // {
-            //     meshRenderer->deserialize(config["components"]);
-            // }
-
             meshRenderer->material->setup();
-            meshRenderer->material->shader->set("transform", VP);
+            meshRenderer->material->shader->set("transform", VP * entity->getLocalToWorldMatrix());
             meshRenderer->mesh->draw();
         }
     }

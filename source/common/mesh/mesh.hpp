@@ -48,16 +48,16 @@ namespace our
             elementCount = elements.size();
 
             /*then we need to fill the buffers with the data we want to keep on the VRAM */
-            
+
             // data() is a built in function in vector stl that returns a pointer to the internal array allocations of the vector
             glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(Vertex), vertices.data(), GL_STATIC_DRAW); // moving the vertices data to the buffer on the VRAM
             /*
             the preceding four function calls are configuration calls as to specify for the vertex shaders how to read the vertex data
             */
-            glVertexAttribPointer(ATTRIB_LOC_POSITION, 3,GL_FLOAT, GL_FALSE, sizeof(Vertex), (void *)0);      
-            glVertexAttribPointer(ATTRIB_LOC_COLOR, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(Vertex), (void *)offsetof(Vertex,color));          
-            glVertexAttribPointer(ATTRIB_LOC_TEXCOORD, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void *)offsetof(Vertex,tex_coord));
-            glVertexAttribPointer(ATTRIB_LOC_NORMAL, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void *)offsetof(Vertex,normal));
+            glVertexAttribPointer(ATTRIB_LOC_POSITION, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void *)0);
+            glVertexAttribPointer(ATTRIB_LOC_COLOR, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(Vertex), (void *)offsetof(Vertex, color));
+            glVertexAttribPointer(ATTRIB_LOC_TEXCOORD, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void *)offsetof(Vertex, tex_coord));
+            glVertexAttribPointer(ATTRIB_LOC_NORMAL, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void *)offsetof(Vertex, normal));
             /*
             1)  The first parameter specifies which vertex attribute we want to configure. Remember that we specified the location of
                 the position vertex attribute in the vertex shader with layout (location = 0). This sets the location of the vertex attribute to 0 and
@@ -75,10 +75,10 @@ namespace our
                 Since the position data is at the start of the data array this value is just 0. We will explore this parameter in more detail later on
             */
 
-           /*
-           The preceding function enable the attribute locations, as to be able to write in to them.
-           Attributes are diabled by default
-           */
+            /*
+            The preceding function enable the attribute locations, as to be able to write in to them.
+            Attributes are diabled by default
+            */
             glEnableVertexAttribArray(ATTRIB_LOC_POSITION);
             glEnableVertexAttribArray(ATTRIB_LOC_COLOR);
             glEnableVertexAttribArray(ATTRIB_LOC_TEXCOORD);
@@ -90,16 +90,16 @@ namespace our
             1)  calling glBufferData to load the data on the buffer created on the video ram
             2)  calling glEnableAttribArray to be able to enable the location on the VRAM to be written to.
             */
-            glBufferData(GL_ELEMENT_ARRAY_BUFFER,elements.size()*sizeof(unsigned int),elements.data(),GL_STATIC_DRAW);
-
+            glBufferData(GL_ELEMENT_ARRAY_BUFFER, elements.size() * sizeof(unsigned int), elements.data(), GL_STATIC_DRAW);
         }
 
         // this function should render the mesh
         void draw()
         {
             // TODO: Write this function
-            //Done: Ahmed Hussien
-            glDrawElements(GL_TRIANGLES, elementCount, GL_UNSIGNED_INT, (void*)0);
+            // Done: Ahmed Hussien
+            glBindVertexArray(VAO);
+            glDrawElements(GL_TRIANGLES, elementCount, GL_UNSIGNED_INT, (void *)0);
         }
 
         // this function should delete the vertex & element buffers and the vertex array object
@@ -108,9 +108,9 @@ namespace our
 
             // TODO: Write this function
             // Done: Ahmed Hussien
-            glDeleteVertexArrays(1,&VAO);
-            glDeleteBuffers(1,&VBO);
-            glDeleteBuffers(1,&EBO);
+            glDeleteVertexArrays(1, &VAO);
+            glDeleteBuffers(1, &VBO);
+            glDeleteBuffers(1, &EBO);
         }
 
         Mesh(Mesh const &) = delete;
