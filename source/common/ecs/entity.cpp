@@ -18,7 +18,7 @@ namespace our
         Entity *current = parent;                          // initialize current's parent pointer
         while (current != nullptr)                         // while loop to get all the parents up to the root
         {
-            transformation_matrix = current->getLocalToWorldMatrix() * transformation_matrix; // ===>TODO check this order
+            transformation_matrix = current->localTransform.toMat4() * transformation_matrix; // ===>TODO check this order
             current = current->parent;                                               // advance the pointer to get next parent
         }
         return transformation_matrix;
