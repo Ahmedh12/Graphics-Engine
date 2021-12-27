@@ -46,8 +46,9 @@ namespace our {
         static void unbind(GLuint textureUnit){
             //TODO: Complete this function
             //Done:Sandra Hany
-           glBindTexture(textureUnit,0);
-           glDeleteTextures(1,&textureUnit);
+           //glBindTexture(textureUnit,0);
+           //glDeleteTextures(1,&textureUnit);
+           glBindSampler(textureUnit,0);
         }
 
         // This function sets a sampler paramter where the value is of type "GLint"

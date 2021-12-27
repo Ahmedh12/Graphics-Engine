@@ -54,7 +54,7 @@ namespace our {
     void TexturedMaterial::setup() const {
         //TODO: Write this function
         //Done:Sandra Hany
-        Material::setup(); 
+        TintedMaterial::setup(); 
         //Here we set the "alphaThreshold" uniform to the value in the member variable alphaThreshold
         shader->set("alphaThreshold",alphaThreshold);
         // Here we set the active texture unit to 0 then bind the texture to it
