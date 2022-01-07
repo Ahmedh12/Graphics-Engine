@@ -35,3 +35,7 @@ vendor/
 
 #errors
 errors/
+
+TeamB8/
+*.zip
+names.txt

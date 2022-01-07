@@ -77,11 +77,14 @@ set(COMMON_SOURCES
         source/common/components/free-camera-controller.cpp
         source/common/components/movement.hpp
         source/common/components/movement.cpp
+        source/common/components/spawner.hpp
+        source/common/components/spawner.cpp
         source/common/components/component-deserializer.hpp
 
         source/common/systems/forward-renderer.hpp
         source/common/systems/free-camera-controller.hpp
         source/common/systems/movement.hpp
+        source/common/systems/spawner.hpp
 )
 
 # Define the directories in which to search for the included headers
@@ -92,6 +95,7 @@ include_directories(
         vendor/glm
         vendor/imgui
         vendor/utils
+        vendor/irrKlang/include
 )
 
 
@@ -111,8 +115,11 @@ set(STATES_SOURCES
         source/states/renderer-test-state.hpp
 )
 
+
+
 # For each example, we add an executable target
 # Each target compiles one example source file and the common & vendor source files
 # Then we link GLFW with each target
 add_executable(GAME_APPLICATION source/main.cpp ${STATES_SOURCES} ${COMMON_SOURCES} ${VENDOR_SOURCES})
-target_link_libraries(GAME_APPLICATION glfw)
+
+target_link_libraries(GAME_APPLICATION glfw )
