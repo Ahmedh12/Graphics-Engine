@@ -79,12 +79,16 @@ set(COMMON_SOURCES
         source/common/components/movement.cpp
         source/common/components/spawner.hpp
         source/common/components/spawner.cpp
+        source/common/components/enemyMovement.hpp
+        source/common/components/enemyMovement.cpp
+
         source/common/components/component-deserializer.hpp
 
         source/common/systems/forward-renderer.hpp
         source/common/systems/free-camera-controller.hpp
         source/common/systems/movement.hpp
         source/common/systems/spawner.hpp
+        source/common/systems/enemyMovement.hpp
 )
 
 # Define the directories in which to search for the included headers

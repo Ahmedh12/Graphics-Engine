@@ -213,7 +213,7 @@
                         1,
                         1
                     ],
-                    "texture": "asphalt",
+                    "texture": "rock",
                     "sampler": "smooth"
                 },
                 "rock": {
@@ -233,7 +233,7 @@
                         1,
                         1
                     ],
-                    "texture": "rock",
+                    "texture": "asphalt",
                     "sampler": "smooth"
                 }
                 
@@ -243,8 +243,8 @@
             {
                 "position": [
                     0,
-                    10,
-                    70
+                    12,
+                    80
                 ],
                 "components": [
                     {
@@ -306,27 +306,123 @@
                     }
                 ]
             },
-            { //hill
+            { //hill 1
                 "position": [
+                    50,
                     0,
-                    10,
-                    0
+                    20
                 ],
                 "rotation": [
                     0,
-                    0,
+                    180,
                     0
                 ],
                 "scale": [
-                    10,
-                    10,
-                    20
+                    30,
+                    50,
+                    80
                 ],
                 "components": [
                     {
                         "type": "Mesh Renderer",
                         "mesh": "rock",
                         "material": "rock"
+                    }
+                ]
+            },
+            { //hill 2
+                "position": [
+                    100,
+                    0,
+                    100
+                ],
+                "rotation": [
+                    0,
+                    180,
+                    0
+                ],
+                "scale": [
+                    60,
+                    100,
+                    120
+                ],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "rock",
+                        "material": "rock"
+                    }
+                ]
+            },
+            { //hill 3
+                "position": [
+                    -50,
+                    0,
+                    20
+                ],
+                "rotation": [
+                    0,
+                    180,
+                    0
+                ],
+                "scale": [
+                    30,
+                    50,
+                    80
+                ],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "rock",
+                        "material": "rock"
+                    }
+                ]
+            },
+            { //hill 4
+                "position": [
+                    -100,
+                    0,
+                    100
+                ],
+                "rotation": [
+                    0,
+                    180,
+                    0
+                ],
+                "scale": [
+                    60,
+                    100,
+                    120
+                ],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "rock",
+                        "material": "rock"
+                    }
+                ]
+            },
+            { //plane
+                "position": [
+                    0,
+                    80,
+                    0
+                ],
+                "rotation": [
+                    -90,
+                    0,
+                    0
+                ],
+                "scale": [
+                    200,
+                    200,
+                    0
+                ],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "plane",
+                        "material": "glass"
                     }
                 ]
             },
@@ -379,9 +475,9 @@
                                 0
                             ],
                             "scale": [
-                                0.055,
-                                0.055,
-                                0.055
+                                0.07,
+                                0.07,
+                                0.07
                             ],
                             "components": [
                                 {
@@ -390,17 +486,8 @@
                                     "material": "zombie"
                                 },
                                 {
-                                    "type": "Movement",
-                                    "angularVelocity": [
-                                        0,
-                                        0,
-                                        0
-                                    ],
-                                    "linearVelocity": [
-                                        0,
-                                        0,
-                                        2
-                                    ]
+                                    "type": "EnemyMovement",
+                                    "speed":0.03 
                                 }
                             ]
                         }

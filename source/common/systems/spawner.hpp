@@ -45,10 +45,10 @@ namespace our
                         srand(time(NULL));
                         random = rand();
                         int deltaPosZ = random % 50;
-                        float speed = (rand()%4)+2;
+                        float speed = ((rand()%10)+1)/100.0f;
                         spawner->EntityToRespawnJasonObj["position"][0] = prevX + (numberOfRemainingEnemies % 2) ? deltaPosX : -deltaPosX;
                         spawner->EntityToRespawnJasonObj["position"][2] = prevZ + (numberOfRemainingEnemies % 2) ? deltaPosZ : -deltaPosZ;
-                        spawner->EntityToRespawnJasonObj["components"][2]["linearVelocity"] = speed ;
+                        spawner->EntityToRespawnJasonObj["components"][2]["speed"] = speed ;
                         std::cout<<speed<<std::endl;
                     }
                 }

@@ -6,6 +6,7 @@
 #include "free-camera-controller.hpp"
 #include "movement.hpp"
 #include "spawner.hpp"
+#include "enemyMovement.hpp"
 
 //TODO:Include all your components header files here and complete the function below accordingly to fill the entity components list
 
@@ -24,8 +25,11 @@ namespace our {
             component = entity->addComponent<FreeCameraControllerComponent>();
         } else if (type == MovementComponent::getID()) {
             component = entity->addComponent<MovementComponent>();
-        }else if (type == SpawnerComponent::getID())
+        }else if (type == SpawnerComponent::getID()){
             component = entity->addComponent<SpawnerComponent>();
+        }else if (type == EnemyMovementComponent::getID()){
+            component = entity->addComponent<EnemyMovementComponent>();
+        }
         if(component) component->deserialize(data);
     }
 

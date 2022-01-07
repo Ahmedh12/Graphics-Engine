@@ -7,6 +7,7 @@
 #include <systems/free-camera-controller.hpp>
 #include <systems/movement.hpp>
 #include <systems/spawner.hpp>
+#include <systems/EnemyMovement.hpp>
 #include <asset-loader.hpp>
 
 
@@ -22,6 +23,7 @@ class Playstate : public our::State
     our::FreeCameraControllerSystem cameraController;
     our::MovementSystem movementSystem;
     our::SpawnerSystem spawnerSystem;
+    our::EnemyMovementSystem enemyMovementSystem;
     //irrklang::ISoundEngine *SoundEngine = irrklang::createIrrKlangDevice();
     void onInitialize() override
     {
@@ -49,6 +51,7 @@ class Playstate : public our::State
         movementSystem.update(&world, (float)deltaTime);
         cameraController.update(&world, (float)deltaTime);
         spawnerSystem.update(&world, (float)deltaTime);
+        enemyMovementSystem.update(&world, (float)deltaTime);
         // And finally we use the renderer system to draw the scene
         auto size = getApp()->getFrameBufferSize();
         renderer.render(&world, glm::ivec2(0, 0), size);
