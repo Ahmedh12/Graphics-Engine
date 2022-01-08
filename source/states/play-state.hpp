@@ -8,6 +8,7 @@
 #include <systems/movement.hpp>
 #include <systems/spawner.hpp>
 #include <systems/EnemyMovement.hpp>
+#include <systems/collision.hpp>
 #include <asset-loader.hpp>
 
 
@@ -24,6 +25,7 @@ class Playstate : public our::State
     our::MovementSystem movementSystem;
     our::SpawnerSystem spawnerSystem;
     our::EnemyMovementSystem enemyMovementSystem;
+    our::CollisionSystem collisionSystem;
     //irrklang::ISoundEngine *SoundEngine = irrklang::createIrrKlangDevice();
     void onInitialize() override
     {
@@ -52,6 +54,7 @@ class Playstate : public our::State
         cameraController.update(&world, (float)deltaTime);
         spawnerSystem.update(&world, (float)deltaTime);
         enemyMovementSystem.update(&world, (float)deltaTime);
+        collisionSystem.update(&world, (float)deltaTime);
         // And finally we use the renderer system to draw the scene
         auto size = getApp()->getFrameBufferSize();
         renderer.render(&world, glm::ivec2(0, 0), size);

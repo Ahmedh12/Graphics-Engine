@@ -86,10 +86,10 @@ namespace our
                 rotation.x = glm::half_pi<float>() * 0.4f;
 
             // We prevent the yaw from exceeding a certain angle from the YZ plane as the player cant look back
-            if (rotation.y < -glm::half_pi<float>() * 0.85f)
-                rotation.y = -glm::half_pi<float>() * 0.85f;
-            if (rotation.y > glm::half_pi<float>() * 0.85f)
-                rotation.y = glm::half_pi<float>() * 0.85f;
+            if (rotation.y < -glm::half_pi<float>() * 0.8f)
+                rotation.y = -glm::half_pi<float>() * 0.8f;
+            if (rotation.y > glm::half_pi<float>() * 0.8f)
+                rotation.y = glm::half_pi<float>() * 0.8f;
 
             // This is not necessary, but whenever the rotation goes outside the 0 to 2*PI range, we wrap it back inside.
             // This could prevent floating point error if the player rotates in single direction for an extremely long time.

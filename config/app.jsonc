@@ -253,6 +253,15 @@
                     },
                     {
                         "type": "Free Camera Controller"
+                    },
+                    {
+                        "type":"Collision",
+                        "center":[
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "radius":0.5
                     }
                 ],
                 "children": [
@@ -459,6 +468,11 @@
                 ]
             },
             {
+                "position":[
+                    0,
+                    0,
+                    0
+                ],
                 "components": [
                     {
                         "type": "Spawner",
@@ -467,7 +481,7 @@
                             "position": [
                                 0,
                                 -1,
-                                -5
+                                -100
                             ],
                             "rotation": [
                                 0,
@@ -487,7 +501,16 @@
                                 },
                                 {
                                     "type": "EnemyMovement",
-                                    "speed":0.03 
+                                    "speed":0.1 
+                                },
+                                {
+                                    "type":"Collision",
+                                    "center":[
+                                        0.0,
+                                        0.0,
+                                        0.0
+                                    ],
+                                    "radius":1
                                 }
                             ]
                         }
