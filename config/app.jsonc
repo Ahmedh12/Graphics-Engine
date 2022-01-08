@@ -236,7 +236,6 @@
                     "texture": "asphalt",
                     "sampler": "smooth"
                 }
-                
             }
         },
         "world": [
@@ -255,13 +254,13 @@
                         "type": "Free Camera Controller"
                     },
                     {
-                        "type":"Collision",
-                        "center":[
+                        "type": "Collision",
+                        "center": [
                             0.0,
                             0.0,
                             0.0
                         ],
-                        "radius":0.5
+                        "radius": 0.5
                     }
                 ],
                 "children": [
@@ -288,10 +287,39 @@
                                 "material": "carbon"
                             }
                         ]
+                    },
+                    { //Health bar
+                        "position": [
+                            2.5,
+                            1,
+                            -1
+                        ],
+                        "rotation": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            5,
+                            0.05,
+                            1
+                        ],
+                        "components": [
+                            {
+                                "type": "Mesh Renderer",
+                                "mesh": "plane",
+                                "material": "glass"
+                            },
+                            {
+                                "type": "WinLose",
+                                "lives":5,
+                                "score":0
+                            }
+                        ]
                     }
                 ]
             },
-            {
+            { //ground
                 "position": [
                     0,
                     -1,
@@ -339,6 +367,30 @@
                     }
                 ]
             },
+            // { //ceiling
+            //     "position": [
+            //         80,
+            //         50,
+            //         20
+            //     ],
+            //     "rotation": [
+            //         -45,
+            //         90,
+            //         0
+            //     ],
+            //     "scale": [
+            //         100,
+            //         100,
+            //         10
+            //     ],
+            //     "components": [
+            //         {
+            //             "type": "Mesh Renderer",
+            //             "mesh": "plane",
+            //             "material": "glass"
+            //         }
+            //     ]
+            // },
             { //hill 2
                 "position": [
                     100,
@@ -411,30 +463,30 @@
                     }
                 ]
             },
-            { //plane
-                "position": [
-                    0,
-                    80,
-                    0
-                ],
-                "rotation": [
-                    -90,
-                    0,
-                    0
-                ],
-                "scale": [
-                    200,
-                    200,
-                    0
-                ],
-                "components": [
-                    {
-                        "type": "Mesh Renderer",
-                        "mesh": "plane",
-                        "material": "glass"
-                    }
-                ]
-            },
+            // { //ceiling
+            //     "position": [
+            //         -80,
+            //         50,
+            //         20
+            //     ],
+            //     "rotation": [
+            //         -45,
+            //         -90,
+            //         0
+            //     ],
+            //     "scale": [
+            //         100,
+            //         100,
+            //         0
+            //     ],
+            //     "components": [
+            //         {
+            //             "type": "Mesh Renderer",
+            //             "mesh": "plane",
+            //             "material": "glass"
+            //         }
+            //     ]
+            // },
             {
                 "position": [
                     -10,
@@ -468,7 +520,7 @@
                 ]
             },
             {
-                "position":[
+                "position": [
                     0,
                     0,
                     0
@@ -501,16 +553,16 @@
                                 },
                                 {
                                     "type": "EnemyMovement",
-                                    "speed":0.1 
+                                    "speed": 0.1
                                 },
                                 {
-                                    "type":"Collision",
-                                    "center":[
+                                    "type": "Collision",
+                                    "center": [
                                         0.0,
                                         0.0,
                                         0.0
                                     ],
-                                    "radius":1
+                                    "radius": 1
                                 }
                             ]
                         }

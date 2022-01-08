@@ -9,16 +9,19 @@
 #include <systems/spawner.hpp>
 #include <systems/EnemyMovement.hpp>
 #include <systems/collision.hpp>
+#include <systems/winLose.hpp>>
 #include <asset-loader.hpp>
 
-
-#include<irrKlang.h>
+#include <irrKlang.h>
 
 //#pragma comment(lib, "irrKlang.lib")
 // This state shows how to use the ECS framework and deserialization.
 class Playstate : public our::State
 {
+public:
+    int lives = 5;
 
+private:
     our::World world;
     our::ForwardRenderer renderer;
     our::FreeCameraControllerSystem cameraController;
@@ -26,7 +29,8 @@ class Playstate : public our::State
     our::SpawnerSystem spawnerSystem;
     our::EnemyMovementSystem enemyMovementSystem;
     our::CollisionSystem collisionSystem;
-    //irrklang::ISoundEngine *SoundEngine = irrklang::createIrrKlangDevice();
+    our::WinLoseSystem winLoseSystem;
+    // irrklang::ISoundEngine *SoundEngine = irrklang::createIrrKlangDevice();
     void onInitialize() override
     {
         // First of all, we get the scene configuration from the app config
@@ -43,8 +47,8 @@ class Playstate : public our::State
         }
         // We initialize the camera controller system since it needs a pointer to the app
         cameraController.enter(getApp());
-        //start Game Sound
-        //SoundEngine->play2D("../../assets/audio/game_sound",true);
+        // start Game Sound
+        // SoundEngine->play2D("../../assets/audio/game_sound",true);
     }
 
     void onDraw(double deltaTime) override
@@ -55,6 +59,8 @@ class Playstate : public our::State
         spawnerSystem.update(&world, (float)deltaTime);
         enemyMovementSystem.update(&world, (float)deltaTime);
         collisionSystem.update(&world, (float)deltaTime);
+        winLoseSystem.update(&world, (float)deltaTime);
+
         // And finally we use the renderer system to draw the scene
         auto size = getApp()->getFrameBufferSize();
         renderer.render(&world, glm::ivec2(0, 0), size);

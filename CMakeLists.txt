@@ -84,6 +84,8 @@ set(COMMON_SOURCES
         source/common/components/enemyMovement.cpp
         source/common/components/collision.hpp
         source/common/components/collision.cpp
+        source/common/components/winLose.hpp
+        source/common/components/winLose.cpp
 
         source/common/components/component-deserializer.hpp
 

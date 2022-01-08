@@ -7,6 +7,7 @@
 #include "movement.hpp"
 #include "spawner.hpp"
 #include "enemyMovement.hpp"
+#include "winLose.hpp"
 #include "collision.hpp"
 
 //TODO:Include all your components header files here and complete the function below accordingly to fill the entity components list
@@ -32,6 +33,8 @@ namespace our {
             component = entity->addComponent<EnemyMovementComponent>();
         }else if (type == CollisionComponent::getID()){
             component = entity->addComponent<CollisionComponent>();
+        }else if (type == WinLoseComponent::getID()){
+            component = entity->addComponent<WinLoseComponent>();
         }
         if(component) component->deserialize(data);
     }

@@ -16,7 +16,6 @@ namespace our
         void update(World *world, float deltaTime)
         {
             // For each entity in the world
-            int n = 1000;
             for (auto entity : world->getEntities())
             {
                 // Get the spawner component if it exists
@@ -29,9 +28,8 @@ namespace our
                     double lastRespawnTime = spawner->lastRespawnTime; // last respawn time is used to respawn a new zombie every 1 minute e.g. 3600 frames
                     spawner->lastRespawnTime += deltaTime;
                     
-                    if (numberOfRemainingEnemies > 0 && lastRespawnTime > n * deltaTime)
+                    if (numberOfRemainingEnemies > 0 && lastRespawnTime > 7000 * deltaTime)
                     {
-                        n=36000;
                         spawner->numberOfEnemies--;
                         spawner->lastRespawnTime = 0;
                         // randomizing spawner position and velocity
