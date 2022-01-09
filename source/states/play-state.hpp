@@ -9,7 +9,8 @@
 #include <systems/spawner.hpp>
 #include <systems/EnemyMovement.hpp>
 #include <systems/collision.hpp>
-#include <systems/winLose.hpp>>
+#include <systems/winLose.hpp>
+#include <systems/bullet.hpp>
 #include <asset-loader.hpp>
 
 #include <irrKlang.h>
@@ -30,6 +31,7 @@ private:
     our::EnemyMovementSystem enemyMovementSystem;
     our::CollisionSystem collisionSystem;
     our::WinLoseSystem winLoseSystem;
+    our::BulletSystem bulletSysytem;
     // irrklang::ISoundEngine *SoundEngine = irrklang::createIrrKlangDevice();
     void onInitialize() override
     {
@@ -60,7 +62,7 @@ private:
         enemyMovementSystem.update(&world, (float)deltaTime);
         collisionSystem.update(&world, (float)deltaTime);
         winLoseSystem.update(&world, (float)deltaTime);
-
+        bulletSysytem.update(&world, (float)deltaTime);
         // And finally we use the renderer system to draw the scene
         auto size = getApp()->getFrameBufferSize();
         renderer.render(&world, glm::ivec2(0, 0), size);

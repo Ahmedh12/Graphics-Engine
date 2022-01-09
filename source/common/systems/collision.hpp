@@ -80,12 +80,12 @@ namespace our
                     */
                     if (distance <= zombieRadius + shooterRadius)
                     {
-                        std::cout << shooterCenter.x << " " << shooterCenter.y << " " << shooterCenter.z << " shooter" << std::endl;
-                        std::cout << zombieCenter.x << " " << zombieCenter.y << " " << zombieCenter.z << " zombie" << std::endl;
-                        std::cout << distance << " Distance" << std::endl;
+                        // std::cout << shooterCenter.x << " " << shooterCenter.y << " " << shooterCenter.z << " shooter" << std::endl;
+                        //std::cout << zombieCenter.x << " " << zombieCenter.y << " " << zombieCenter.z << " zombie" << std::endl;
+                        // std::cout << distance << " Distance" << std::endl;
                         world->markForRemoval(entity);
                         lives--;
-                        std::cout << "Collision Object Detected, lives"<< lives << std::endl;
+                        //std::cout << "Collision Object Detected, lives"<< lives << std::endl;
                     }
                 }
             }

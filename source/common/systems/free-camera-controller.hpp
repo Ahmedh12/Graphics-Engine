@@ -10,6 +10,7 @@
 #include <glm/gtc/constants.hpp>
 #include <glm/trigonometric.hpp>
 #include <glm/gtx/fast_trigonometry.hpp>
+#include <glm/gtx/euler_angles.hpp>
 
 namespace our
 {
@@ -21,7 +22,7 @@ namespace our
     {
         Application *app;          // The application in which the state runs
         bool mouse_locked = false; // Is the mouse locked
-
+        double last_shot = 0;
     public:
         // When a state enters, it should call this function and give it the pointer to the application
         void enter(Application *app)
@@ -32,13 +33,11 @@ namespace our
         // This should be called every frame to update all entities containing a FreeCameraControllerComponent
         void update(World *world, float deltaTime)
         {
-            // First of all, we search for an entity containing both a CameraComponent and a FreeCameraControllerComponent
-            // As soon as we find one, we break
             CameraComponent *camera = nullptr;
             FreeCameraControllerComponent *controller = nullptr;
             for (auto entity : world->getEntities())
             {
-                if ((entity->parent)) // rifle is a parent of the world which has the camera and free camera controller components
+                if ((entity->parent)) // rifle is a child of the world which has the camera and free camera controller components
                 {
                     camera = entity->parent->getComponent<CameraComponent>();
                     controller = entity->parent->getComponent<FreeCameraControllerComponent>();
@@ -51,32 +50,93 @@ namespace our
             if (!(camera && controller))
                 return;
             // Get the entity that we found via getOwner of camera (we could use controller->getOwner())
-            Entity *entity = camera->getOwner();
+            Entity *entity = camera->getOwner(); // shooter e.g. Rifle
+
+            camera = nullptr;
+            controller = nullptr;
+
+            // getting the camera owner itself , above we fetched his child
+            for (auto entity : world->getEntities())
+            {
+                camera = entity->getComponent<CameraComponent>();
+                controller = entity->getComponent<FreeCameraControllerComponent>();
+
+                if (camera && controller)
+                    break;
+            }
 
             // If the left mouse button is pressed, we lock and hide the mouse. This common in First Person Games.
-            if (app->getMouse().isPressed(GLFW_MOUSE_BUTTON_1) && !mouse_locked)
-            {
-                app->getMouse().lockMouse(app->getWindow());
-                mouse_locked = true;
-                // If the left mouse button is released, we unlock and unhide the mouse.
-            }
-            else if (!app->getMouse().isPressed(GLFW_MOUSE_BUTTON_1) && mouse_locked)
-            {
-                app->getMouse().unlockMouse(app->getWindow());
-                mouse_locked = false;
-            }
+            // if (app->getMouse().isPressed(GLFW_MOUSE_BUTTON_1) && !mouse_locked)
+            // {
+            //     app->getMouse().lockMouse(app->getWindow());
+            //     mouse_locked = true;
+            //     // If the left mouse button is released, we unlock and unhide the mouse.
+            // }
+            // else if (!app->getMouse().isPressed(GLFW_MOUSE_BUTTON_1) && mouse_locked)
+            // {
+            //     app->getMouse().unlockMouse(app->getWindow());
+            //     mouse_locked = false;
+            // }
 
             // We get a reference to the entity's position and rotation
             glm::vec3 &position = entity->localTransform.position;
             glm::vec3 &rotation = entity->localTransform.rotation;
 
-            // If the left mouse button is pressed, we get the change in the mouse location
+            if (!app->getKeyboard().isPressed(GLFW_KEY_ESCAPE)) //lock the the mouse if the ESC key is not pressed
+            {
+                app->getMouse().lockMouse(app->getWindow());
+                mouse_locked = true;
+            }
+
             // and use it to update the camera rotation
-            if (app->getMouse().isPressed(GLFW_MOUSE_BUTTON_1))
+            // if (app->getMouse().isPressed(GLFW_MOUSE_BUTTON_1))
+            // {
+            // glm::vec2 delta = app->getMouse().getMouseDelta();
+            // rotation.x -= delta.y * controller->rotationSensitivity; // The y-axis controls the pitch
+            // rotation.y -= delta.x * controller->rotationSensitivity; // The x-axis controls the yaw
+            // }
+
+            if (app->getKeyboard().isPressed(GLFW_KEY_ESCAPE)) // Unlock the mouse if escape is pressed
+            {
+                app->getMouse().unlockMouse(app->getWindow());
+                mouse_locked = false;
+            }
+
+
+            if (mouse_locked)
             {
                 glm::vec2 delta = app->getMouse().getMouseDelta();
                 rotation.x -= delta.y * controller->rotationSensitivity; // The y-axis controls the pitch
                 rotation.y -= delta.x * controller->rotationSensitivity; // The x-axis controls the yaw
+
+                //Calcutaing Matrix for the bullet firing poition
+                glm::mat4 translateMat = glm::translate(glm::mat4(1.0f), position);
+                glm::mat4 rotateMat = glm::yawPitchRoll(rotation.y, rotation.x, rotation.z);
+                glm::mat4 transformation = translateMat * rotateMat;
+                glm::vec3 fireAt = transformation * glm::vec4(0.0f,-0.5f,-1.0f,1.0f);
+
+                //Setting the bullet firing position
+                controller->bullet["position"][0] = fireAt.x;
+                controller->bullet["position"][1] = fireAt.y;
+                controller->bullet["position"][2] = fireAt.z;
+
+                glm::vec3 dir = fireAt - position;
+                glm::normalize(dir);
+                //Adjust the velocity vector of movement component to be in the direction of the firing position
+                controller->bullet["components"][1]["linearVelocity"][0] = 20 * dir.x;
+                controller->bullet["components"][1]["linearVelocity"][1] = dir.y;
+                controller->bullet["components"][1]["linearVelocity"][2] = 20 * dir.z;
+
+                mouse_locked = true;
+                //std::cout << app->getMouse().getMousePosition().x << " " << app->getMouse().getMousePosition().y << "\n";
+            }
+
+            if (app->getMouse().isPressed(GLFW_MOUSE_BUTTON_1) && last_shot > 200 * deltaTime)
+            {
+                std::cout<<"bullet\n";
+                last_shot=0.0;
+                Entity *bullet = world->add();
+                bullet->deserialize(controller->bullet);
             }
 
             // We prevent the pitch from exceeding a certain angle from the XZ plane to prevent gimbal locks
@@ -121,6 +181,8 @@ namespace our
             // // A & D moves the player left or right
             // if(app->getKeyboard().isPressed(GLFW_KEY_D)) position += right * (deltaTime * current_sensitivity.x);
             // if(app->getKeyboard().isPressed(GLFW_KEY_A)) position -= right * (deltaTime * current_sensitivity.x);
+
+            last_shot+=deltaTime;
         }
 
         // When the state exits, it should call this function to ensure the mouse is unlocked
@@ -133,5 +195,6 @@ namespace our
             }
         }
     };
+
 
 }

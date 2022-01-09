@@ -23,15 +23,14 @@ namespace our
                 // If the spawner component exists
                 if (spawner)
                 {
-                    // TODO:logic to respawn enemies
-                    int numberOfRemainingEnemies = spawner->numberOfEnemies;
-                    double lastRespawnTime = spawner->lastRespawnTime; // last respawn time is used to respawn a new zombie every 1 minute e.g. 3600 frames
-                    spawner->lastRespawnTime += deltaTime;
+                    int& numberOfRemainingEnemies = spawner->numberOfEnemies;
+                    double& lastRespawnTime = spawner->lastRespawnTime; // last respawn time is used to respawn a new zombie every 1 minute e.g. 3600 frames
+                    lastRespawnTime += deltaTime;
                     
-                    if (numberOfRemainingEnemies > 0 && lastRespawnTime > 7000 * deltaTime)
+                    if (numberOfRemainingEnemies > 0 && lastRespawnTime > 1000 * deltaTime)
                     {
-                        spawner->numberOfEnemies--;
-                        spawner->lastRespawnTime = 0;
+                        numberOfRemainingEnemies--;
+                        lastRespawnTime = 0;
                         // randomizing spawner position and velocity
                         int prevX = spawner->EntityToRespawnJasonObj["position"][0].get<int>();
                         int prevZ = spawner->EntityToRespawnJasonObj["position"][2].get<int>();

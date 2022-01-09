@@ -86,6 +86,8 @@ set(COMMON_SOURCES
         source/common/components/collision.cpp
         source/common/components/winLose.hpp
         source/common/components/winLose.cpp
+        source/common/components/bullet.hpp
+        source/common/components/bullet.cpp
 
         source/common/components/component-deserializer.hpp
 
@@ -95,6 +97,7 @@ set(COMMON_SOURCES
         source/common/systems/spawner.hpp
         source/common/systems/enemyMovement.hpp
         source/common/systems/collision.hpp
+        source/common/systems/bullet.hpp
 )
 
 # Define the directories in which to search for the included headers
