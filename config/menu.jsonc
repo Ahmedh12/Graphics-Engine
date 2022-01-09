@@ -1,0 +1,99 @@
+{
+    "start-scene": "menu",
+    "window": {
+        "title": "Win",
+        "size": {
+            "width": 1280,
+            "height": 720
+        },
+        "fullscreen": false
+    },
+    "scene": {
+        "assets": {
+            "shaders": {
+                "tinted": {
+                    "vs": "assets/shaders/tinted.vert",
+                    "fs": "assets/shaders/tinted.frag"
+                },
+                "textured": {
+                    "vs": "assets/shaders/textured.vert",
+                    "fs": "assets/shaders/textured.frag"
+                }
+            },
+            "textures": {
+                "win": "assets/textures/win.png"
+            },
+            "mesh": "",
+            "output_type": 0,
+            "samplers": {
+                "default": {},
+                "pixelated": {
+                    "MAG_FILTER": "GL_NEAREST"
+                },
+                "smooth": {
+                    "MAG_FILTER": "GL_LINEAR"
+                }
+            },
+            "materials": {
+                "win": {
+                    "type": "textured",
+                    "shader": "textured",
+                    "pipelineState": {
+                        "faceCulling": {
+                            "enabled": false
+                        },
+                        "depthTesting": {
+                            "enabled": true
+                        }
+                    },
+                    "tint": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "texture": "win",
+                    "sampler": "smooth"
+                }
+            }
+        },
+        "world": [
+            {
+                "position": [
+                    0,
+                    0,
+                    10
+                ],
+                "components": [
+                    {
+                        "type": "Camera"
+                    }
+                ]
+            },
+            { 
+                "position": [
+                    0,
+                    -1,
+                    0
+                ],
+                "rotation": [
+                    0,
+                    0,
+                    0
+                ],
+                "scale": [
+                    10,
+                    10,
+                    1
+                ],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "plane",
+                        "material": "win"
+                    }
+                ]
+            }
+        ]
+    }
+}

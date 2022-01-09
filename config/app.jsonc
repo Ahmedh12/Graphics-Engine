@@ -29,7 +29,8 @@
                 "carbon": "assets/textures/mesh_Material _831_Specular.tga",
                 "zombie": "assets/textures/zombie_tex.png",
                 "asphalt": "assets/textures/asphalt.jpg",
-                "rock": "assets/textures/Rock/Rock_2_Base_Color.jpg"
+                "rock": "assets/textures/Rock/Rock_2_Base_Color.jpg",
+                "win": "assets/textures/win.png"
             },
             "meshes": {
                 "cube": "assets/models/cube.obj",
@@ -116,7 +117,7 @@
                     "texture": "grass",
                     "sampler": "default"
                 },
-                "monkey": {
+                "win": {
                     "type": "textured",
                     "shader": "textured",
                     "pipelineState": {
@@ -133,8 +134,8 @@
                         1,
                         1
                     ],
-                    "texture": "monkey",
-                    "sampler": "default"
+                    "texture": "win",
+                    "sampler": "smooth"
                 },
                 "moon": {
                     "type": "textured",
@@ -283,9 +284,9 @@
                                     ]
                                 },
                                 {
-                                    "type":"Bullet",
-                                    "radius":0.5,
-                                    "center":[
+                                    "type": "Bullet",
+                                    "radius": 0.5,
+                                    "center": [
                                         0,
                                         0,
                                         0
@@ -504,30 +505,6 @@
                     }
                 ]
             },
-            // { //ceiling
-            //     "position": [
-            //         -80,
-            //         50,
-            //         20
-            //     ],
-            //     "rotation": [
-            //         -45,
-            //         -90,
-            //         0
-            //     ],
-            //     "scale": [
-            //         100,
-            //         100,
-            //         0
-            //     ],
-            //     "components": [
-            //         {
-            //             "type": "Mesh Renderer",
-            //             "mesh": "plane",
-            //             "material": "glass"
-            //         }
-            //     ]
-            // },
             {
                 "position": [
                     -10,

@@ -99,7 +99,7 @@ namespace our
                 }
             }
             world->deleteMarkedEntities();
-            // std::cout<<score<<"\n";
+            //std::cout<<score<<"\n";
         }
     };
 

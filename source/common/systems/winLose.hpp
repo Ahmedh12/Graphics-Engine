@@ -17,6 +17,10 @@ namespace our
     public:
         void update(World *world, float deltaTime)
         {
+        }
+
+        int update(World *world)
+        {
             // Getting the shooter Entity
             CameraComponent *cam = nullptr;
             FreeCameraControllerComponent *control = nullptr;
@@ -41,10 +45,23 @@ namespace our
             }
 
             int lives = health->getComponent<WinLoseComponent>()->lives;
+            int score = health->getComponent<WinLoseComponent>()->score;
+            //std::cout<<"Score from winLOse Comp "<<score<<std::endl;
+            
+            if(score >= 20)
+            {
+                return 2;
+            }
+
             if (lives > 0)
             {
                 health->getComponent<WinLoseComponent>()->getOwner()->localTransform.scale.x = (float)lives;
+                return 1;
+            }else
+            {
+                return 0;
             }
+
         }
     };
 

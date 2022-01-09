@@ -61,8 +61,17 @@ private:
         spawnerSystem.update(&world, (float)deltaTime);
         enemyMovementSystem.update(&world, (float)deltaTime);
         collisionSystem.update(&world, (float)deltaTime);
-        winLoseSystem.update(&world, (float)deltaTime);
         bulletSysytem.update(&world, (float)deltaTime);
+        
+        int status = winLoseSystem.update(&world);
+
+        if(status == 0)
+        {
+            getApp()->changeState("transform-test");
+        }else if(status == 2)
+        {
+            getApp()->changeState("mesh-test");
+        }
         // And finally we use the renderer system to draw the scene
         auto size = getApp()->getFrameBufferSize();
         renderer.render(&world, glm::ivec2(0, 0), size);

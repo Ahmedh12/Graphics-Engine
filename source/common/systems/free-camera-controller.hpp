@@ -133,7 +133,7 @@ namespace our
 
             if (app->getMouse().isPressed(GLFW_MOUSE_BUTTON_1) && last_shot > 200 * deltaTime)
             {
-                std::cout<<"bullet\n";
+                //std::cout<<"bullet\n";
                 last_shot=0.0;
                 Entity *bullet = world->add();
                 bullet->deserialize(controller->bullet);
