@@ -10,6 +10,7 @@
 #include "winLose.hpp"
 #include "collision.hpp"
 #include "bullet.hpp"
+#include "light.hpp"
 
 //TODO:Include all your components header files here and complete the function below accordingly to fill the entity components list
 
@@ -38,6 +39,8 @@ namespace our {
             component = entity->addComponent<WinLoseComponent>();
         }else if (type == BulletComponent::getID()){
             component = entity->addComponent<BulletComponent>();
+        }else if(type == LightComponent::getID()){
+            component = entity->addComponent<LightComponent>();
         }
         if(component) component->deserialize(data);
     }

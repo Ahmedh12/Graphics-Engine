@@ -18,6 +18,11 @@
                 "textured": {
                     "vs": "assets/shaders/textured.vert",
                     "fs": "assets/shaders/textured.frag"
+                },
+                "lit":
+                {
+                    "vs":"assets/shaders/light.vert",
+                    "fs":"assets/shaders/light.frag"
                 }
             },
             "textures": {
@@ -29,7 +34,10 @@
                 "carbon": "assets/textures/mesh_Material _831_Specular.tga",
                 "zombie": "assets/textures/zombie_tex.png",
                 "asphalt": "assets/textures/asphalt.jpg",
-                "rock": "assets/textures/Rock/Rock_2_Base_Color.jpg",
+                "rock_base": "assets/textures/Rock/Rock_2_Base_Color.jpg",
+                "rock_normal": "assets/textures/Rock/Rock_2_Normal.jpg",
+                "rock_specular": "assets/textures/Rock/Rock_2_Specular.jpg",
+                "rock_mixed": "assets/textures/Rock/Rock_2_Mixed_AO.jpg",
                 "win": "assets/textures/win.png"
             },
             "meshes": {
@@ -71,8 +79,8 @@
                     ]
                 },
                 "glass": {
-                    "type": "textured",
-                    "shader": "textured",
+                    "type": "lit",
+                    "shader": "lit",
                     "pipelineState": {
                         "faceCulling": {
                             "enabled": false
@@ -94,12 +102,16 @@
                         1,
                         1
                     ],
-                    "texture": "glass",
+                    "albedo_tex": "glass",
+                    "specular_tex":"glass",
+                    "roughness_tex":"glass",
+                    "emission_tex":"glass",
+                    "AO_tex":"glass",
                     "sampler": "pixelated"
                 },
                 "grass": {
-                    "type": "textured",
-                    "shader": "textured",
+                    "type": "lit",
+                    "shader": "lit",
                     "pipelineState": {
                         "faceCulling": {
                             "enabled": false
@@ -114,12 +126,16 @@
                         1,
                         1
                     ],
-                    "texture": "grass",
-                    "sampler": "default"
+                    "albedo_tex": "grass",
+                    "specular_tex":"grass",
+                    "roughness_tex":"grass",
+                    "emission_tex":"grass",
+                    "AO_tex":"grass",
+                    "sampler": "smooth"
                 },
                 "win": {
-                    "type": "textured",
-                    "shader": "textured",
+                    "type": "lit",
+                    "shader": "lit",
                     "pipelineState": {
                         "faceCulling": {
                             "enabled": false
@@ -134,12 +150,16 @@
                         1,
                         1
                     ],
-                    "texture": "win",
+                    "albedo_tex": "win",
+                    "specular_tex":"win",
+                    "roughness_tex":"win",
+                    "emission_tex":"win",
+                    "AO_tex":"win",
                     "sampler": "smooth"
                 },
                 "moon": {
-                    "type": "textured",
-                    "shader": "textured",
+                    "type": "lit",
+                    "shader": "lit",
                     "pipelineState": {
                         "faceCulling": {
                             "enabled": false
@@ -154,12 +174,16 @@
                         1,
                         1
                     ],
-                    "texture": "moon",
-                    "sampler": "default"
+                    "albedo_tex": "moon",
+                    "specular_tex":"moon",
+                    "roughness_tex":"moon",
+                    "emission_tex":"moon",
+                    "AO_tex":"moon",
+                    "sampler": "smooth"
                 },
                 "carbon": {
-                    "type": "textured",
-                    "shader": "textured",
+                    "type": "lit",
+                    "shader": "lit",
                     "pipelineState": {
                         "faceCulling": {
                             "enabled": false
@@ -174,12 +198,16 @@
                         1,
                         1
                     ],
-                    "texture": "carbon",
-                    "sampler": "default"
+                    "albedo_tex": "carbon",
+                    "specular_tex":"carbon",
+                    "roughness_tex":"carbon",
+                    "emission_tex":"carbon",
+                    "AO_tex":"carbon",
+                    "sampler": "smooth"
                 },
                 "zombie": {
-                    "type": "textured",
-                    "shader": "textured",
+                    "type": "lit",
+                    "shader": "lit",
                     "pipelineState": {
                         "faceCulling": {
                             "enabled": false
@@ -194,12 +222,16 @@
                         1,
                         1
                     ],
-                    "texture": "zombie",
-                    "sampler": "default"
+                    "albedo_tex": "zombie",
+                    "specular_tex":"zombie",
+                    "roughness_tex":"zombie",
+                    "emission_tex":"zombie",
+                    "AO_tex":"zombie",
+                    "sampler": "smooth"
                 },
                 "asphalt": {
-                    "type": "textured",
-                    "shader": "textured",
+                    "type": "lit",
+                    "shader": "lit",
                     "pipelineState": {
                         "faceCulling": {
                             "enabled": false
@@ -214,12 +246,16 @@
                         1,
                         1
                     ],
-                    "texture": "rock",
+                    "albedo_tex": "rock_base",
+                    "specular_tex":"rock_specular",
+                    "roughness_tex":"rock_normal",
+                    "emission_tex":"rock_mixed",
+                    "AO_tex":"rock_base",
                     "sampler": "smooth"
                 },
                 "rock": {
-                    "type": "textured",
-                    "shader": "textured",
+                    "type": "lit",
+                    "shader": "lit",
                     "pipelineState": {
                         "faceCulling": {
                             "enabled": false
@@ -234,7 +270,11 @@
                         1,
                         1
                     ],
-                    "texture": "asphalt",
+                    "albedo_tex": "asphalt",
+                    "specular_tex":"asphalt",
+                    "roughness_tex":"asphalt",
+                    "emission_tex":"asphalt",
+                    "AO_tex":"asphalt",
                     "sampler": "smooth"
                 }
             }
@@ -534,6 +574,13 @@
                             90,
                             0
                         ]
+                    },
+                    {
+                        "type":"Light",
+                        "attenuation":[0,0,1],
+                        "coneAngle":[15.0,30.0],
+                        "color":[1,1,1],
+                        "count":1
                     }
                 ]
             },

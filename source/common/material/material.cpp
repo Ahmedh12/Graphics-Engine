@@ -77,4 +77,43 @@ namespace our {
         sampler = AssetLoader<Sampler>::get(data.value("sampler", ""));
     }
 
+    void LitMaterial::setup() const
+    {
+        Material::setup();
+        glActiveTexture(GL_TEXTURE0);
+        Albedo_tex->bind();
+        sampler->bind(0);
+        shader->set("material.albedo",0);
+        glActiveTexture(GL_TEXTURE1);
+        Specular_tex->bind();
+         sampler->bind(1);
+         shader->set("material.specular",1);
+        glActiveTexture(GL_TEXTURE2);
+        Roughness_tex->bind();
+         sampler->bind(2);
+         shader->set("material.roughness",2);
+        glActiveTexture(GL_TEXTURE3);
+        Emission_tex->bind();
+         sampler->bind(3);
+         shader->set("material.ambient_occlusion",3);
+        glActiveTexture(GL_TEXTURE4);
+        AO_tex->bind();
+         sampler->bind(4);
+         shader->set("material.emission",4);
+
+    }
+
+    void LitMaterial::deserialize(const nlohmann::json& data)
+    {
+        Material::deserialize(data);
+        if(!data.is_object()) return;
+
+        Albedo_tex = AssetLoader<Texture2D>::get(data.value("albedo_tex",""));
+        Specular_tex = AssetLoader<Texture2D>::get(data.value("specular_tex",""));
+        Roughness_tex = AssetLoader<Texture2D>::get(data.value("roughness_tex",""));
+        Emission_tex = AssetLoader<Texture2D>::get(data.value("emission_tex",""));
+        AO_tex = AssetLoader<Texture2D>::get(data.value("AO_tex",""));
+        sampler = AssetLoader<Sampler>::get(data.value("sampler", ""));
+    }
+
 }
