@@ -22,6 +22,18 @@ namespace our
         Material *material;
     };
 
+    struct LightCommand
+    {
+        glm::vec3 direction;
+        glm::vec3 position;
+        glm::vec2 coneAngle;
+        glm::vec3 color;
+        glm::vec3 attenuation;
+        int type;
+        int count;
+
+    }
+
     // A forward renderer is a renderer that draw the object final color directly to the framebuffer
     // In other words, the fragment shader in the material should output the color that we should see on the screen
     // This is different from more complex renderers that could draw intermediate data to a framebuffer before computing the final color
@@ -105,18 +117,26 @@ namespace our
             //  Don't forget to set the "transform" uniform to be equal the model-view-projection matrix for each render command
             for (auto opaque : opaqueCommands)
             {
+                // opaque.material->setup();
+                // glm:: mat4 transformation = VP * opaque.localToWorld;
+                // opaque.material->shader->set("transform",transformation);
+                // opaque.mesh->draw();
+
                 opaque.material->setup();
-                glm:: mat4 transformation = VP * opaque.localToWorld;
-                opaque.material->shader->set("transform",transformation);
-                opaque.mesh->draw();
+                glm::mat4 M = VP * opaque.localToWorld;
+                opaque.material->shader->set("M", M);
+                opaque.material->shader->set("VP", VP);
+                glm::mat4 M_IT = glm::inverse(glm::transpose(M));
+                opaque.material->shader->set("M_IT", M_IT);
+                opaque.material->shader->set("eye", camera->getOwner()->getLocalToWorldMatrix() * glm::vec4(0.0f, 0.0f, 0.0f, 1.0f));
             }
 
             for (auto transparent : transparentCommands)
             {
-                transparent.material->setup();
-                glm:: mat4 transformation = VP * transparent.localToWorld;
-                transparent.material->shader->set("transform",transformation);
-                transparent.mesh->draw();
+                // transparent.material->setup();
+                // glm:: mat4 transformation = VP * transparent.localToWorld;
+                // transparent.material->shader->set("transform",transformation);
+                // transparent.mesh->draw();
             }
         };
     };

@@ -88,6 +88,8 @@ set(COMMON_SOURCES
         source/common/components/winLose.cpp
         source/common/components/bullet.hpp
         source/common/components/bullet.cpp
+        source/common/components/light.hpp
+        source/common/components/light.cpp
 
         source/common/components/component-deserializer.hpp
 
